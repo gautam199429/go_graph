@@ -16,8 +16,6 @@ import (
 // @Accept  json
 // @Produce  json
 // @Param schema body string true "GraphQL Schema"
-// @Success 200 {object} map[string]interface{}
-// @Failure 400 {object} map[string]string
 // @Router /parse-graphql [post]
 func ParseGraphQLSchema(c *gin.Context) {
 

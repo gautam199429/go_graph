@@ -23,18 +23,7 @@ paths:
           type: string
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties:
-              type: string
-            type: object
+      responses: {}
       summary: Parse GraphQL Schema
       tags:
       - GraphQL Parser
