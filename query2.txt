@@ -1,0 +1,138 @@
+"""
+Apollo FieldSet definition
+"""
+scalar _FieldSet
+
+"""
+GraphQL Entity Implementation Key
+"""
+directive @key(fields: _FieldSet!) on OBJECT | INTERFACE
+
+"""
+DPI - Required Scopes
+"""
+directive @dpi_requiredScopes(scopes: [[String!]]!) on FIELD_DEFINITION | OBJECT
+
+"""
+DPI - Standardized Attribute
+"""
+directive @dpi_standardizedAttribute(standardizedAttributeVersionId: String!) on FIELD_DEFINITION | OBJECT
+
+"""
+DPI - Data Entity
+"""
+directive @dpi_dataEntity(dataEntityVersionId: String!) on FIELD_DEFINITION | OBJECT
+
+"""
+DPI - Resolver Generation
+"""
+directive @dpi_remote(path: String!) on FIELD_DEFINITION | OBJECT
+directive @dpi_dataSource(name: String!) on FIELD_DEFINITION | OBJECT
+directive @dpi_require(fieldName: String!) on FIELD_DEFINITION | OBJECT
+
+"""
+Data Product Identifying Key -- Account 2-Part Key
+"""
+type Account2PartKey
+@dpi_standardizedAttribute(standardizedAttributeVersionId: "6b83deab-b025-4f56-8acc-4938b889c419") {
+    """
+    Identifying Key Part - Account Reference ID -- Standardized Attribute
+    """
+    accountReferenceId: String
+}
+
+"""
+Input type for Account 2-Part Key
+"""
+input Account2PartKey_Input {
+    accountReferenceId: String
+}
+
+"""
+Queries for Credit Card Account - With Demo Linkage
+"""
+type Query {
+    """
+    Query creditCardAccountWithDemoLinkage. Returns CreditCardAccountWithDemoLinkage
+    """
+    creditCardAccountWithDemoLinkage(
+        identifyingKey: Account2PartKey_Input
+    ): CreditCardAccountWithDemoLinkage
+}
+
+"""
+DPI GraphQL SDL: Credit Card Account - With Demo Linkage
+Data Product: AK Test - Credit Card Account
+"""
+type CreditCardAccountWithDemoLinkage
+@dpi_requiredScopes(scopes: [["creditcard:decision"]])
+@key(fields: "account2PartKey { accountReferenceId }") {
+    """
+    Account 2-Part Key -- Data Entity Identifying Key Attribute
+    """
+    account2PartKey: Account2PartKey
+
+    """
+    Credit Card Account -- Data Entity
+    Description: A credit card account entity describes the executed agreement
+    between Capital One and a customer for credit provision.
+    """
+    creditCardAccount: CreditCardAccount
+
+    """
+    Credit Card Account Status -- Data Entity
+    Description: A credit card account status entity describes the multiple statuses
+    a credit card account may exhibit.
+    """
+    creditCardAccountStatus: CreditCardAccountStatus
+
+    """
+    Linked DPI Schema -- Schema to use in linking
+    Schema Description:Linked schema
+    Schema Id:2853357
+    Data Product:ak test -- credit card activity -- 1 -- (assetId:2411451)
+    """
+    schemaToUseInLinking: SchemaToUseInLinking
+}
+
+"""
+Credit Card Account -- Data Entity
+"""
+type CreditCardAccount
+@key(fields: "account2PartKey { accountReferenceId }")
+@dpi_dataEntity(dataEntityVersionId: "3e705c88-a5e7-4f9c-8cf7-54f600f4e4df") {
+    """
+    Account 2-Part Key -- Data Entity Identifying Key Attribute
+    """
+    account2PartKey: Account2PartKey
+}
+
+"""
+Credit Card Account Status -- Data Entity
+"""
+type CreditCardAccountStatus
+@key(fields: "account2PartKey { accountReferenceId }")
+@dpi_dataEntity(dataEntityVersionId: "94c11913-0a4b-466c-91d3-ceb8db460b3e") {
+    """
+    Account 2-Part Key -- Data Entity Identifying Key Attribute
+    """
+    account2PartKey: Account2PartKey
+}
+
+"""
+Linked DPI Schema -- Schema to use in linking
+"""
+type SchemaToUseInLinking
+@key(fields: "consumerServicingActivityLogId") {
+"""
+Identifying Key Part - Consumer Servicing Activity Log ID -- Standardized Attribute
+"""
+consumerServicingActivityLogId: String
+}
+
+"""
+Root schema definition
+"""
+schema {
+query: Query
+}

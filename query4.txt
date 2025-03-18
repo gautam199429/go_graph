@@ -1,0 +1,19 @@
+type AvailableCreditAmount {
+  availableSpendingCreditAmount: Float
+  availableCashCreditAmount: Float
+}
+
+type Account {
+  accountReferenceId: String
+  availableCreditAmount: AvailableCreditAmount
+}
+
+type Customer {
+  name: String
+  age: Int
+  accounts: [Account]
+}
+
+type Query {
+  customerById(customerReferenceId: String!): Customer
+}
