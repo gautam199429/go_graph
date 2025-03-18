@@ -1,11 +1,19 @@
+host: localhost:8080
 info:
-  contact: {}
+  contact:
+    email: support@example.com
+    name: API Support
+    url: http://www.example.com/support
+  description: This is a sample server for parsing GraphQL schemas.
+  title: GraphQL Parser API
+  version: "1.0"
 paths:
   /parse-graphql:
     post:
       consumes:
       - application/json
       description: Parse a given GraphQL schema and return the types
+      operationId: parse-graphql
       parameters:
       - description: GraphQL Schema
         in: body
@@ -29,5 +37,5 @@ paths:
             type: object
       summary: Parse GraphQL Schema
       tags:
-      - schema
+      - GraphQL Parser
 swagger: "2.0"

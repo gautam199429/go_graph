@@ -11,7 +11,8 @@ import (
 // ParseGraphQLSchema godoc
 // @Summary Parse GraphQL Schema
 // @Description Parse a given GraphQL schema and return the types
-// @Tags schema
+// @Tags GraphQL Parser
+// @ID parse-graphql
 // @Accept  json
 // @Produce  json
 // @Param schema body string true "GraphQL Schema"

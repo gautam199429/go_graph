@@ -9,7 +9,11 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.example.com/support",
+            "email": "support@example.com"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -25,9 +29,10 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "schema"
+                    "GraphQL Parser"
                 ],
                 "summary": "Parse GraphQL Schema",
+                "operationId": "parse-graphql",
                 "parameters": [
                     {
                         "description": "GraphQL Schema",
@@ -64,12 +69,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "GraphQL Parser API",
+	Description:      "This is a sample server for parsing GraphQL schemas.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

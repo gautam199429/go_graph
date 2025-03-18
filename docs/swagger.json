@@ -1,8 +1,16 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample server for parsing GraphQL schemas.",
+        "title": "GraphQL Parser API",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.example.com/support",
+            "email": "support@example.com"
+        },
+        "version": "1.0"
     },
+    "host": "localhost:8080",
     "paths": {
         "/parse-graphql": {
             "post": {
@@ -14,9 +22,10 @@
                     "application/json"
                 ],
                 "tags": [
-                    "schema"
+                    "GraphQL Parser"
                 ],
                 "summary": "Parse GraphQL Schema",
+                "operationId": "parse-graphql",
                 "parameters": [
                     {
                         "description": "GraphQL Schema",

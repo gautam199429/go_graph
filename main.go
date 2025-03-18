@@ -11,6 +11,13 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title GraphQL Parser API
+// @version 1.0
+// @description This is a sample server for parsing GraphQL schemas.
+// @host localhost:8080
+// @contact.name API Support
+// @contact.url http://www.example.com/support
+// @contact.email support@example.com
 func main() {
 	r := gin.Default()
 
