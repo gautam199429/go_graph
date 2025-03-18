@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/vektah/gqlparser/v2"
@@ -15,20 +14,18 @@ func ParseSchema(schemaStr string) (TypeMap, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	types := make(TypeMap)
 	for typeName, def := range doc.Types {
 		if validateString(typeName) && len(def.Fields) > 0 {
-			types[typeName] = make(map[string]string)
-			fmt.Println(typeName)
-			for _, filed := range def.Fields {
-				fmt.Println(filed.Name)
-				fmt.Println(filed.Type.String())
-				if validateString(filed.Name) {
-					types[typeName][filed.Name] = filed.Type.String()
+			fieldMap := make(map[string]string)
+			for _, field := range def.Fields {
+				if validateString(field.Name) {
+					fieldMap[field.Name] = field.Type.String()
 				}
 			}
+			types[typeName] = fieldMap
 		}
-
 	}
 	return types, nil
 }

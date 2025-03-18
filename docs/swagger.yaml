@@ -1,0 +1,33 @@
+info:
+  contact: {}
+paths:
+  /parse-graphql:
+    post:
+      consumes:
+      - application/json
+      description: Parse a given GraphQL schema and return the types
+      parameters:
+      - description: GraphQL Schema
+        in: body
+        name: schema
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Parse GraphQL Schema
+      tags:
+      - schema
+swagger: "2.0"
